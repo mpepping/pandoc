@@ -1,16 +1,37 @@
-FROM pandoc/latex:latest
+FROM fedora:latest
 
-# Install additional TeX packages such as those used by eisvogel template
-RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
-    tlmgr update \
-    && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
-    sourcecodepro titling pagecolor epstopdf zref footnotebackref \
-    koma-script hardwrap catchfile \
-    && apk add --update ghostscript
+LABEL maintainer "Martijn Pepping <martijn.pepping@automiq.nl>"
+LABEL org.opencontainers.image.authors "Martijn Pepping <martijn.pepping@automiq.nl>"
+LABEL org.opencontainers.image.description "Pandoc and TeX in a container for PDF generation .. YMMV"
+LABEL org.opencontainers.image.source "https://github.com/mpepping/pandoc"
+LABEL org.opencontainers.image.title "Pandoc"
+LABEL org.opencontainers.image.url "https://github.com/mpepping/pandoc/pkgs/container/pandoc"
 
-# Install Node and mermaid-filter
+RUN dnf install -y \
+      chromium \
+      ghostscript \
+      npm \
+      pandoc \
+      texlive-babel-english.noarch \
+      texlive-catchfile.noarch \
+      texlive-epstopdf.noarch \
+      texlive-footnotebackref.noarch \
+      texlive-grffile.noarch \
+      texlive-hardwrap.noarch \
+      texlive-koma-script.noarch \
+      texlive-ly1.noarch \
+      texlive-mdframed.noarch \
+      texlive-mweights.noarch \
+      texlive-pagecolor.noarch \
+      texlive-sourcecodepro.noarch \
+      texlive-sourcesanspro.noarch \
+      texlive-titling.noarch \
+      texlive-zref.noarch
+
+# Seems necessary for Node and mermaid-filter
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 
-RUN apk add --update udev ttf-freefont chromium npm \
-    && npm install -g mermaid-filter@1.4.5 --unsafe-perm=true
+RUN npm install -g mermaid-filter@1.4.5 --unsafe-perm=true
+
+ENTRYPOINT [ "pandoc" ]
