@@ -22,7 +22,7 @@ RUN dnf install -y \
       texlive-koma-script.noarch \
       texlive-ly1.noarch \
       texlive-mdframed.noarch \
-      texlive-metafont.aarch64 \
+      texlive-metafont \
       texlive-ec.noarch \
       texlive-mweights.noarch \
       texlive-pagecolor.noarch \
