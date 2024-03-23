@@ -16,11 +16,14 @@ RUN dnf install -y \
       texlive-catchfile.noarch \
       texlive-epstopdf.noarch \
       texlive-footnotebackref.noarch \
+      texlive-grfext.noarch \
       texlive-grffile.noarch \
       texlive-hardwrap.noarch \
       texlive-koma-script.noarch \
       texlive-ly1.noarch \
       texlive-mdframed.noarch \
+      texlive-metafont.aarch64 \
+      texlive-ec.noarch \
       texlive-mweights.noarch \
       texlive-pagecolor.noarch \
       texlive-sourcecodepro.noarch \
