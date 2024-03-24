@@ -23,6 +23,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        architecture: [ amd64, arm64 ]
+
     permissions:
       contents: read
       packages: write
@@ -41,6 +46,11 @@ jobs:
         uses: sigstore/cosign-installer@e1523de7571e31dbe865fd2e80c5c7c23ae71eb4 #v3.4.0
         with:
           cosign-release: 'v2.2.3'
+
+      # Set up QEMU for ARM64 emulation
+      - name: Set up QEMU
+        if: matrix.architecture == 'arm64'
+        uses: docker/setup-buildx-action@2b51285047da1547ffb1b2203d8be4c0af6b1f20 # v3.2.0
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
@@ -73,6 +83,7 @@ jobs:
         uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5.3.0
         with:
           context: .
+          platforms: linux/${{ matrix.architecture }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
