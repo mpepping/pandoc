@@ -1,6 +1,6 @@
 #!/bin/bash
 
-filename="notes"
+filename=${1}
 
 pandoc ${filename}.md -f markdown -o ${filename}.pdf \
 --template ./eisvogel.tex \
