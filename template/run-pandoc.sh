@@ -6,6 +6,7 @@ pandoc ${filename}.md -f markdown -o ${filename}.pdf \
 --template ./eisvogel.tex \
 --listings \
 --number-sections \
+--pdf-engine=lualatex \
 --toc -F mermaid-filter \
 --variable toc-own-page=true \
 --variable titlepage=true \

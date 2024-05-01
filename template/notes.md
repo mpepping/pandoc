@@ -4,14 +4,24 @@ subtitle : "Example document. This is a template for a markdown document."
 author: [Martijn Pepping]
 date  : 2024/02
 tags  : [Documentation, Example, Stuff, Martijn, Pepping]
+header-includes:
+ - |
+  \directlua{luaotfload.add_fallback
+     ("emojifallback",
+      {
+        "Twemoji Mozilla:mode=harf;script=DFLT;"
+      }
+     )}
 ---
+`\renewcommand{\familydefault}{\sfdefault}`{=latex}
+`\setmainfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
+`\setsansfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
 
-<!-- markdownlint-disable MD025 MD033 -->
+<!-- markdownlint-disable MD024 MD025 MD033 -->
 
 # Notes
 
 Example document. This is a template for a markdown document.
-
 
 ## Section
 
@@ -23,13 +33,15 @@ All Markdown elements are supported, and the document can be styled using CSS or
 
 ## Including images
 
-Images can be included in the document via `![Alt text](path/to/image.png)`, for example: `![Pandoc logo](./assets/pandoc.png)`.
+Images can be included in the document via `![Alt text](path/to/image.png)`.
+
+For example: `![Pandoc logo](./assets/pandoc.png)`.
 
 ![Pandoc logo](./assets/pandoc.png)
 
 ## Code
 
-Supports code highlighting.
+Code highlighting.
 
 ```python
 print("Hello World")
@@ -37,10 +49,53 @@ print("Hello World")
 
 ## Lists
 
-* Foo
-* Bar
-* Baz
+Numbered list:
 
 1. Foo
 1. Bar
 1. Baz
+
+Bulleted list:
+
+* Foo
+* Bar
+* Baz
+
+Nested list:
+
+1. Item 1
+   * Subitem 1.1
+   * Subitem 1.2
+1. Item 2
+   * Subitem 2.1
+     * Subitem 2.1.1
+   * Subitem 2.2
+1. Item 3
+
+## Emoji
+
+Emoji and Unicode characters support 🌟 💫 ✨
+
+## Quoted text
+
+Text can be quoted using `>`.
+
+> Quoted text
+
+## Tables
+
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+
+## Math
+
+Inline math: $x^2 + y^2 = z^2$
+
+\newpage
+
+# New page
+
+Use `\newpage` to start a new page.
+
