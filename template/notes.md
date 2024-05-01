@@ -16,6 +16,7 @@ header-includes:
 `\renewcommand{\familydefault}{\sfdefault}`{=latex}
 `\setmainfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
 `\setsansfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
+`\setmonofont{sourcecodepro}[RawFeature={fallback=emojifallback}]`{=latex}
 
 <!-- markdownlint-disable MD024 MD025 MD033 -->
 
@@ -74,7 +75,11 @@ Nested list:
 
 ## Emoji
 
-Emoji and Unicode characters support 🌟 💫 ✨
+Emoji and Unicode characters support 🌟 💫 ✨ ✅ 🔌 ✨ 🔑 ℹ 🔀
+
+```text
+Emoji support in code blocks 🌟 💫 ✨ ✅ 🔌 ✨ 🔑 ℹ 🔀
+```
 
 ## Quoted text
 
@@ -98,4 +103,3 @@ Inline math: $x^2 + y^2 = z^2$
 # New page
 
 Use `\newpage` to start a new page.
-
