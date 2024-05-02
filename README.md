@@ -1,6 +1,8 @@
 # pandoc
 
-Pet project to create PDF documents from markdown files using pandoc. See the `./template` folder for an example.
+Pet project to create PDF documents from markdown files using pandoc. See the `./template` folder for an example. Uses the Latex Eisvogel template.
+
+See and example [PDF document](./template/notes.pdf) here.
 
 ## Usage
 
