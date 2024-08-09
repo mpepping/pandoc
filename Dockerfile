@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.url "https://github.com/mpepping/pandoc/pkgs/cont
 RUN dnf install -y \
       chromium \
       ghostscript \
-      npm \
+      nodejs \
       pandoc \
       texlive-babel-english.noarch \
       texlive-catchfile.noarch \
@@ -41,6 +41,6 @@ RUN dnf install -y \
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 
-RUN npm install -g mermaid-filter@1.4.5 --unsafe-perm=true
+RUN npm install -g mermaid-filter@1.4.6 --unsafe-perm=true
 
 ENTRYPOINT [ "pandoc" ]
