@@ -1,4 +1,4 @@
-name: Docker
+name: Build ARM64
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -22,7 +22,7 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, arm64]
 
     strategy:
       matrix:
@@ -47,10 +47,10 @@ jobs:
         with:
           cosign-release: 'v2.2.3'
 
-      # Set up QEMU for ARM64 emulation
-      - name: Set up QEMU
-        if: matrix.architecture == 'arm64'
-        uses: docker/setup-qemu-action@v3
+      # # Set up QEMU for ARM64 emulation
+      # - name: Set up QEMU
+      #   if: matrix.architecture == 'arm64'
+      #   uses: docker/setup-qemu-action@v3
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
