@@ -1,11 +1,11 @@
 FROM fedora:latest
 
-LABEL maintainer "Martijn Pepping <martijn.pepping@automiq.nl>"
-LABEL org.opencontainers.image.authors "Martijn Pepping <martijn.pepping@automiq.nl>"
-LABEL org.opencontainers.image.description "Pandoc and TeX in a container for PDF generation .. YMMV"
-LABEL org.opencontainers.image.source "https://github.com/mpepping/pandoc"
-LABEL org.opencontainers.image.title "Pandoc"
-LABEL org.opencontainers.image.url "https://github.com/mpepping/pandoc/pkgs/container/pandoc"
+LABEL maintainer="Martijn Pepping <martijn.pepping@automiq.nl>"
+LABEL org.opencontainers.image.authors="Martijn Pepping <martijn.pepping@automiq.nl>"
+LABEL org.opencontainers.image.description="Pandoc and TeX in a container for PDF generation .. YMMV"
+LABEL org.opencontainers.image.source="https://github.com/mpepping/pandoc"
+LABEL org.opencontainers.image.title="Pandoc"
+LABEL org.opencontainers.image.url="https://github.com/mpepping/pandoc/pkgs/container/pandoc"
 
 RUN dnf install -y \
       chromium \
