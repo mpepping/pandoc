@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM fedora:40
 
 LABEL maintainer="Martijn Pepping <martijn.pepping@automiq.nl>"
 LABEL org.opencontainers.image.authors="Martijn Pepping <martijn.pepping@automiq.nl>"
