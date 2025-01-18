@@ -74,6 +74,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Verify multi-platform manifest
+        if: github.event_name != 'pull_request'
         run: docker manifest inspect ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}
 
       - name: Sign Docker image
