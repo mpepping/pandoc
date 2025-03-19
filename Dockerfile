@@ -12,6 +12,7 @@ RUN dnf install -y \
       ghostscript \
       nodejs \
       pandoc \
+      sqlite \
       texlive-babel-english.noarch \
       texlive-catchfile.noarch \
       texlive-ec.noarch \
