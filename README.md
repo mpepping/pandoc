@@ -12,4 +12,9 @@ Copy the files from the `./template` folder, update the `MD_NAME` value in the `
 MD_NAME = notes # Update this value to match your markdown file
 ```
 
-Run `make` create a PDF file or `make help` to see the available commands.
+## Examples
+
+1. Run `make` to create a PDF file with TOC, titlepage and section numbering.
+1. Run `make MD_NAME=myfile` to create a PDF file from `myfile.md`.
+1. Run `make markdown2pdf MD_NAME=myfile` to generate a simple PDF file from `myfile.md`.
+1. Run or `make help` to see the available commands.

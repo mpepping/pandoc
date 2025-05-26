@@ -1,7 +1,7 @@
 # vim:ft=make:
 
 OS_NAME := $(shell uname -s | tr A-Z a-z)
-MD_NAME := "notes"
+MD_NAME ?= notes
 
 .DEFAULT_GOAL := all
 .PHONY: help
@@ -14,6 +14,10 @@ all: pdf clean open ## Create PDF clean and open
 pdf: ## Create PDF file from markdown using pandoc
 	@echo "Creating PDF .."
 	@docker run -i --rm -v ${PWD}:/workdir:z -w /workdir --name pandoc-container --entrypoint /bin/bash ghcr.io/mpepping/pandoc ./run-pandoc.sh $(MD_NAME)
+
+markdown2pdf: ## Convert markdown to PDF using pandoc
+	@echo "Converting markdown to PDF .."
+	@docker run -i --rm -v ${PWD}:/workdir:z -w /workdir --name pandoc-container --entrypoint /bin/bash ghcr.io/mpepping/pandoc ./markdown2pdf.sh $(MD_NAME)
 
 clean: ## Clean auxiliary files
 	@rm -rf notes*.log notes*.aux notes*.out notes*.tex *.err
@@ -29,3 +33,4 @@ endif
 
 os: ## Show OS name
 	@echo $(OS_NAME)
+
