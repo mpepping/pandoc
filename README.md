@@ -17,4 +17,4 @@ MD_NAME = notes # Update this value to match your markdown file
 1. Run `make` to create a PDF file with TOC, titlepage and section numbering.
 1. Run `make MD_NAME=myfile` to create a PDF file from `myfile.md`.
 1. Run `make markdown2pdf MD_NAME=myfile` to generate a simple PDF file from `myfile.md`.
-1. Run or `make help` to see the available commands.
+1. Run `make help` to see the available commands.
