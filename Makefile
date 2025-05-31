@@ -17,7 +17,7 @@ clean: ## Remove the image
 	docker rmi $(APP_NAME):latest
 
 start: ## Start the container
-	docker run -it --rm --name pandoc --entrypoint bash $(APP_NAME):latest 
+	docker run -it --rm --name pandoc --entrypoint bash $(APP_NAME):latest
 
 stop: ## Stop the container
 	docker rm -f pandoc
