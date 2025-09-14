@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Remove untagged container images
-        uses: actions/delete-package-versions@v5.0.0
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'pandoc'
           package-type: 'container'
