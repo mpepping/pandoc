@@ -1,3 +1,4 @@
+name: Registry cleanup
 on:
   workflow_dispatch:
 
