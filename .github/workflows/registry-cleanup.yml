@@ -12,5 +12,6 @@ jobs:
           package-name: 'pandoc'
           package-type: 'container'
           delete-only-untagged-versions: 'true'
+          delete-only-pre-release-versions: 'true'
           min-versions-to-keep: 10
           token: ${{ secrets.NUKE_TOKEN }}
