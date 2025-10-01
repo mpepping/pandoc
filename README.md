@@ -4,7 +4,6 @@ Pet project to create PDF documents from markdown files using pandoc. See the `.
 
 See and example [PDF document](./template/notes.pdf) here.
 
-
 ## Usage
 
 This projects run as a container image so you need to have Docker or Podman installed. Copy the files from the `./template` folder, update the `MD_NAME` value in the `Makefile` from `notes` to the filename matching your Markdown file:
@@ -12,9 +11,10 @@ This projects run as a container image so you need to have Docker or Podman inst
 ```make, Makefile
 MD_NAME = notes # Update this value to match your markdown file
 ```
-Run `make` (or `make help`) to create a PDF from your Markdown document. The PDF will be created as `$MD_NAME.pdf`. 
 
-Alternatively, if you don't have `make` installed, you can run `docker` (or `podman`) directly:
+Run `make` (or `make help`) to create a PDF from your Markdown document. The PDF will be created as `$MD_NAME.pdf`.
+
+Alternatively, if you don't have `make` installed, you can run `docker` (or `podman`, `container`) directly:
 
 ```bash
 docker run -i --rm \
