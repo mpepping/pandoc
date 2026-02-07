@@ -49,3 +49,6 @@ stop: ## Stop the container
 runtime: ## Show detected container runtime and OS
 	@echo "Using container runtime: $(CONTAINER_RUNTIME) on $(OS_NAME)"
 
+version: ## Show the pandoc version in the image
+	@$(CONTAINER_RUNTIME) run --rm $(APP_NAME):latest --version
+
