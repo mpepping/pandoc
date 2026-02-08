@@ -1,6 +1,8 @@
 # vim:ft=make:
 
 MD_NAME ?= notes
+IMAGE_NAME ?= ghcr.io/mpepping/pandoc
+IMAGE_TAG ?= main
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
 # Auto-detect container runtime
@@ -25,11 +27,11 @@ all: pdf clean open ## Create PDF, cleanup and open the PDF (make pdf + clean + 
 
 pdf: ## Create PDF file from markdown using pandoc
 	@echo "Creating PDF .."
-	@$(CONTAINER_RUNTIME) run -i --rm -v ${PWD}:/workdir$(VOLUME_OPTS) -w /workdir --name pandoc-container --entrypoint /bin/bash ghcr.io/mpepping/pandoc ./run-pandoc.sh $(MD_NAME)
+	@$(CONTAINER_RUNTIME) run -i --rm -v ${PWD}:/workdir$(VOLUME_OPTS) -w /workdir --name pandoc-container --entrypoint /bin/bash $(IMAGE_NAME):$(IMAGE_TAG) ./run-pandoc.sh $(MD_NAME)
 
 markdown2pdf: ## Create a simple PDF from a Markdown file (make [..] MD_NAME=myfile)
 	@echo "Converting markdown to PDF .."
-	@$(CONTAINER_RUNTIME) run -i --rm -v ${PWD}:/workdir$(VOLUME_OPTS) -w /workdir --name pandoc-container --entrypoint /bin/bash ghcr.io/mpepping/pandoc ./markdown2pdf.sh $(MD_NAME)
+	@$(CONTAINER_RUNTIME) run -i --rm -v ${PWD}:/workdir$(VOLUME_OPTS) -w /workdir --name pandoc-container --entrypoint /bin/bash $(IMAGE_NAME):$(IMAGE_TAG) ./markdown2pdf.sh $(MD_NAME)
 
 clean: ## Clean auxiliary files
 	@rm -rf $(MD_NAME)*.log $(MD_NAME)*.aux $(MD_NAME)*.out $(MD_NAME)*.tex *.err
@@ -42,6 +44,9 @@ ifeq ($(OS_NAME),linux)
 else
 	@open $(MD_NAME).pdf
 endif
+
+version: ## Show the pandoc version in the image
+	@$(CONTAINER_RUNTIME) run --rm $(IMAGE_NAME):$(IMAGE_TAG) --version
 
 runtime: ## Show detected container runtime and OS
 	@echo "Using container runtime: $(CONTAINER_RUNTIME) on $(OS_NAME)"

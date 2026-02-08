@@ -1,18 +1,21 @@
 ---
 title: "Notes"
-subtitle : "Example document. This is a template for a markdown document."
+subtitle: "Example document. This is a template for a markdown document."
 author: [Martijn Pepping]
-date  : 2024/02
-tags  : [Documentation, Example, Stuff, Martijn, Pepping]
+date: 2024/02
+tags: [Documentation, Example, Stuff, Martijn, Pepping]
+lang: "en"
+colorlinks: true
 header-includes:
- - |
-  \directlua{luaotfload.add_fallback
-     ("emojifallback",
-      {
-        "Twemoji Mozilla:mode=harf;script=DFLT;"
-      }
-     )}
+  - |
+    \directlua{luaotfload.add_fallback
+       ("emojifallback",
+        {
+          "Twemoji Mozilla:mode=harf;script=DFLT;"
+        }
+       )}
 ---
+
 `\renewcommand{\familydefault}{\sfdefault}`{=latex}
 `\setmainfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
 `\setsansfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
@@ -58,19 +61,19 @@ Numbered list:
 
 Bulleted list:
 
-* Foo
-* Bar
-* Baz
+- Foo
+- Bar
+- Baz
 
 Nested list:
 
 1. Item 1
-   * Subitem 1.1
-   * Subitem 1.2
+   - Subitem 1.1
+   - Subitem 1.2
 1. Item 2
-   * Subitem 2.1
-     * Subitem 2.1.1
-   * Subitem 2.2
+   - Subitem 2.1
+     - Subitem 2.1.1
+   - Subitem 2.2
 1. Item 3
 
 ## Emoji
@@ -81,6 +84,83 @@ Emoji and Unicode characters support 🌟 💫 ✨ ✅ 🔌 ✨ 🔑 ℹ 🔀
 Emoji support in code blocks 🌟 💫 ✨ ✅ 🔌 ✨ 🔑 ℹ 🔀
 ```
 
+## GitHub Alerts
+
+[GitHub-style Markdown alerts] are supported with the [pandoc extension `alerts`](https://pandoc.org/MANUAL.html#extension-alerts).
+Please note that the resulting alerts are unstyled.
+
+To create alerts that look similar to GitHub’s, you can use the included Lua filter `alerts.lua`. Simply pass it to your pandoc command with `--lua-filter="alerts.lua"`. The necessary LaTeX packages and commands will be automatically included in your document.
+
+### Simple Alerts
+
+The alerts in this section contain only plain text content.
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+### Markdown Inside Alerts
+
+The following alerts use Markdown formatting within their content.
+
+> [!NOTE]
+> Lorem ipsum **dolor** sit amet, `consectetur adipiscing` elit.
+>
+> ```
+> if(args.length < 2) {
+> 	System.out.println("Lorem ipsum dolor sit amet");
+> }
+> ```
+
+> [!TIP]
+> Lorem ipsum **dolor** sit amet, `consectetur adipiscing` elit.
+>
+> ```
+> if(args.length < 2) {
+> 	System.out.println("Lorem ipsum dolor sit amet");
+> }
+> ```
+
+> [!IMPORTANT]
+> Lorem ipsum **dolor** sit amet, `consectetur adipiscing` elit.
+>
+> ```
+> if(args.length < 2) {
+> 	System.out.println("Lorem ipsum dolor sit amet");
+> }
+> ```
+
+> [!WARNING]
+> Lorem ipsum **dolor** sit amet, `consectetur adipiscing` elit.
+>
+> ```
+> if(args.length < 2) {
+> 	System.out.println("Lorem ipsum dolor sit amet");
+> }
+> ```
+
+> [!CAUTION]
+> Lorem ipsum **dolor** sit amet, `consectetur adipiscing` elit.
+>
+> ```
+> if(args.length < 2) {
+> 	System.out.println("Lorem ipsum dolor sit amet");
+> }
+> ```
+
+[GitHub-style Markdown alerts]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts
+
 ## Quoted text
 
 Text can be quoted using `>`.
@@ -90,7 +170,7 @@ Text can be quoted using `>`.
 ## Tables
 
 | Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
+| -------- | -------- | -------- |
 | Cell 1   | Cell 2   | Cell 3   |
 | Cell 4   | Cell 5   | Cell 6   |
 
