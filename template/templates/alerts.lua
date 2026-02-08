@@ -29,59 +29,62 @@ function Meta(meta)
 end
 
 
--- Handle admonition Divs
-function Div(div)
-  local kind = nil
-  for _, cls in ipairs(div.classes or {}) do
-    if cls == "note"
-       or cls == "tip"
-       or cls == "important"
-       or cls == "warning"
-       or cls == "caution" then
-      kind = cls
-      break
-    end
+-- Handle GitHub-style alert blockquotes (> [!NOTE], > [!TIP], etc.)
+function BlockQuote(el)
+  if #el.content == 0 or el.content[1].t ~= "Para" then
+    return nil
   end
+
+  local para = el.content[1]
+  local text = pandoc.utils.stringify(para)
+
+  -- Check for GitHub alert markers
+  local kind = text:match("^%[!(NOTE)%]")
+    or text:match("^%[!(TIP)%]")
+    or text:match("^%[!(IMPORTANT)%]")
+    or text:match("^%[!(WARNING)%]")
+    or text:match("^%[!(CAUTION)%]")
 
   if not kind then
     return nil
   end
 
-  local title_inlines = nil
-  local body_blocks = {}
+  kind = string.lower(kind)
+  local env_name = kind .. "-box"
 
-  for _, block in ipairs(div.content) do
-    if block.t == "Div"
-       and block.classes
-       and block.classes[1] == "title"
-       and block.content[1]
-       and block.content[1].t == "Para" then
-      title_inlines = block.content[1].content
-    elseif block.t ~= "Div" then
-      table.insert(body_blocks, block)
+  -- Split first paragraph: remove marker, keep content after SoftBreak/LineBreak
+  local body_inlines = pandoc.List()
+  local found_break = false
+
+  for _, inline in ipairs(para.content) do
+    if found_break then
+      body_inlines:insert(inline)
+    elseif inline.t == "SoftBreak" or inline.t == "LineBreak" then
+      found_break = true
     end
   end
 
-  if not title_inlines or #body_blocks == 0 then
+  -- Build body blocks
+  local body_blocks = pandoc.List()
+
+  if #body_inlines > 0 then
+    body_blocks:insert(pandoc.Para(body_inlines))
+  end
+
+  -- Add remaining blocks from the blockquote
+  for i = 2, #el.content do
+    body_blocks:insert(el.content[i])
+  end
+
+  if #body_blocks == 0 then
     return nil
   end
 
-  local title_text = pandoc.utils.stringify(title_inlines)
-  local env_name = string.lower(title_text) .. "-box"
-
-  local result = {}
-
-  table.insert(result,
-    pandoc.RawBlock("latex", "\\begin{" .. env_name .. "}")
-  )
-
-  for _, blk in ipairs(body_blocks) do
-    table.insert(result, blk)
-  end
-
-  table.insert(result,
-    pandoc.RawBlock("latex", "\\end{" .. env_name .. "}")
-  )
+  -- Wrap in tcolorbox
+  local result = pandoc.List()
+  result:insert(pandoc.RawBlock("latex", "\\begin{" .. env_name .. "}"))
+  result:extend(body_blocks)
+  result:insert(pandoc.RawBlock("latex", "\\end{" .. env_name .. "}"))
 
   return result
 end

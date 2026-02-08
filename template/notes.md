@@ -6,20 +6,16 @@ date: 2024/02
 tags: [Documentation, Example, Stuff, Martijn, Pepping]
 lang: "en"
 colorlinks: true
-header-includes:
-  - |
-    \directlua{luaotfload.add_fallback
-       ("emojifallback",
-        {
-          "Twemoji Mozilla:mode=harf;script=DFLT;"
-        }
-       )}
+mainfont: "sourcesanspro"
+sansfont: "sourcesanspro"
+monofont: "sourcecodepro"
+mainfontfallback:
+  - "Twemoji Mozilla:mode=harf"
+sansfontfallback:
+  - "Twemoji Mozilla:mode=harf"
+monofontfallback:
+  - "Twemoji Mozilla:mode=harf"
 ---
-
-`\renewcommand{\familydefault}{\sfdefault}`{=latex}
-`\setmainfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
-`\setsansfont{sourcesanspro}[RawFeature={fallback=emojifallback}]`{=latex}
-`\setmonofont{sourcecodepro}[RawFeature={fallback=emojifallback}]`{=latex}
 
 <!-- markdownlint-disable MD024 MD025 MD033 -->
 
