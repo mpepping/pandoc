@@ -10,6 +10,11 @@ ifeq ($(CONTAINER_RUNTIME),)
 $(error No docker, podman or container found in PATH)
 endif
 
+# Play nice with SElinux when using podman
+ifneq ($(findstring podman,$(CONTAINER_RUNTIME)),)
+	VOLUME_OPTS := ':z'
+endif
+
 .PHONY: help
 help: ## This help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -51,4 +56,8 @@ runtime: ## Show detected container runtime and OS
 
 version: ## Show the pandoc version in the image
 	@$(CONTAINER_RUNTIME) run --rm $(APP_NAME):latest --version
+
+test: ## Compile template/notes.md with the local image to verify it works
+	@echo "Compiling template/notes.md with $(APP_NAME):latest .."
+	@$(CONTAINER_RUNTIME) run -i --rm -v $(PWD)/template:/workdir$(VOLUME_OPTS) -w /workdir --entrypoint /bin/bash $(APP_NAME):latest ./run-pandoc.sh notes
 
